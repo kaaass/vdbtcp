@@ -11,8 +11,8 @@ endif()
 set(CMAKE_C_COMPILER_FORCED True)
 set(CMAKE_CXX_COMPILER_FORCED True)
 
-project(vdbtcp C CXX)
 include("${VITASDK}/share/vita.cmake" REQUIRED)
+project(vdbtcp C CXX)
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}  -std=c99 -fno-strict-aliasing")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wl,-q -Wall -O3 -nostdlib -fno-rtti -fno-exceptions")
@@ -32,7 +32,7 @@ add_executable(vdbtcp
 )
 
 target_link_libraries(vdbtcp
-  c
+  k
   gcc
   vdb_user_stub
   SceIofilemgr_stub
