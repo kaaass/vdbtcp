@@ -20,7 +20,31 @@ namespace
         sceAppMgrDestroyOtherApp();
     }
 
-    void cmd_launch(const char *argument, char *output, size_t outSize)
+    void cmd_launch(const char *argument, char *output, size_t outSize) {
+        char uri[32];
+
+        snprintf(uri, 32, "psgm:play?titleid=%s", argument);
+
+        if (sceAppMgrLaunchAppByUri(0x20000, uri) < 0) {
+            strcpy(output, "Error: cannot launch the app. Is the TITLEID correct?\n");
+        } else {
+            strcpy(output, "Launched.\n");
+        }
+    }
+
+    void cmd_screen(const char *argument, char *output, size_t outSize) {
+        if (!strcmp(argument, "on")) {
+            scePowerRequestDisplayOn();
+            strcpy(output, "Turning display on...\n");
+        } else if (!strcmp(argument, "off")) {
+            scePowerRequestDisplayOff();
+            strcpy(output, "Turning display off...\n");
+        } else {
+            strcpy(output, "Error: param should be 'on' or 'off'\n");
+        }
+    }
+
+    void cmd_debug(const char *argument, char *output, size_t outSize)
     {
         LOG("about to launch app\n");
         auto res = vdb_launch_debug(argument);
@@ -44,8 +68,10 @@ namespace
         } handlers[] = 
         {
             { "destroy", cmd_destroy },
-            { "launch", cmd_launch },
-            { "reboot", cmd_reboot },
+            { "launch",  cmd_launch },
+            { "debug",   cmd_debug },
+            { "reboot",  cmd_reboot },
+            { "screen",  cmd_screen },
         };
 
         constexpr size_t handlerCount = sizeof(handlers)/sizeof(handlers[0]);

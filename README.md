@@ -17,7 +17,7 @@ This provides three services:
 
 This plugin can be used to launch an application in debug mode. To do this, you need to issue a `launch` command to the vitacompanion service on port 1338. This command differs from typical vitacompanion and has the following format:
 ```
-launch /path/on/vita/to/self
+debug /path/on/vita/to/self
 ```
 Once you issue this command the vita will launch it, and the debugger will automatically attach and you can use the GDB protocol on port 31337 to debug it.
 

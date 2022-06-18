@@ -44,7 +44,7 @@ namespace
                 }
             }
 
-            if (!ftp.listen(21337))
+            if (!ftp.listen(1337))
             {
                 if (!network.connected())
                 {
@@ -58,7 +58,7 @@ namespace
                 }
             }
 
-            if (!commands.listen(21338))
+            if (!commands.listen(1338))
             {
                 if (!network.connected())
                 {
